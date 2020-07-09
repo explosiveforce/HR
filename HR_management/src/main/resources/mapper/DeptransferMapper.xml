@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ndgwww.HR.management.mapper.DeptransferMapper">
+  <resultMap id="BaseResultMap" type="com.ndgwww.HR.management.pojo.Deptransfer">
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="predepartmentname" jdbcType="VARCHAR" property="predepartmentname" />
+    <result column="departmentid" jdbcType="VARCHAR" property="departmentid" />
+    <association property="employee" javaType="com.ndgwww.HR.management.pojo.Employee">
+      <id column="id" jdbcType="VARCHAR" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="sex" jdbcType="INTEGER" property="sex" />
+<!--      jdbcType="DATE"-->
+      <result column="birth" jdbcType="DATE" property="birth" />
+      <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+      <result column="departmentId" jdbcType="VARCHAR" property="departmentid" />
+      <result column="departmentName" jdbcType="VARCHAR" property="departmentname" />
+      <result column="stationId" jdbcType="VARCHAR" property="stationid" />
+      <result column="stationName" jdbcType="VARCHAR" property="stationname" />
+      <result column="employDate" jdbcType="DATE"  property="employdate" />
+      <result column="workDate" jdbcType="DATE"  property="workdate" />
+      <result column="form" jdbcType="INTEGER" property="form" />
+      <result column="source" jdbcType="VARCHAR" property="source" />
+      <result column="politics" jdbcType="VARCHAR" property="politics" />
+      <result column="folk" jdbcType="VARCHAR" property="folk" />
+      <result column="nation" jdbcType="VARCHAR" property="nation" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="height" jdbcType="VARCHAR" property="height" />
+      <result column="blood" jdbcType="VARCHAR" property="blood" />
+      <result column="status" jdbcType="VARCHAR" property="status" />
+      <result column="homeplace" jdbcType="VARCHAR" property="homeplace" />
+      <result column="seat" jdbcType="VARCHAR" property="seat" />
+      <result column="eduBack" jdbcType="VARCHAR" property="eduback" />
+      <result column="eduDegree" jdbcType="VARCHAR" property="edudegree" />
+      <result column="graSchool" jdbcType="VARCHAR" property="graschool" />
+      <result column="speciality" jdbcType="VARCHAR" property="speciality" />
+      <result column="graDate" jdbcType="DATE" property="gradate" />
+      <result column="tag" jdbcType="INTEGER" property="tag" />
+    </association>
+    <association property="department" javaType="com.ndgwww.HR.management.pojo.Department">
+      <id column="id" jdbcType="VARCHAR" property="id" />
+      <result column="departmentname" jdbcType="VARCHAR" property="departmentname" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+      <result column="fax" jdbcType="VARCHAR" property="fax" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="predepartment" jdbcType="VARCHAR" property="predepartment" />
+      <result column="date" jdbcType="DATE" property="date" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+      id,type, reason,
+      remark, date, predepartmentname,departmentid
+  </sql>
+    <!--最新的所有员工包括没有更新的的信息-->
+    <select id="selectAllEmp" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        employee.id,employee.name,departmentid,department.name as departmentname
+        from employee left join department on employee.departmentid=department.id where tag =1
+    </select>
+  <!--最新的所有已更新员工部门的信息-->
+  <select id="selectAllDeptransfer" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    a.id,b.name,a.type,a.reason,a.remark,a.date,a.predepartmentname,a.departmentid,department.name as departmentname
+    from (SELECT <include refid="Base_Column_List" /> FROM deptransfer  ORDER BY date desc LIMIT 0,100) a join employee b on a.id = b.id left join department on  a.departmentid= department.id where b.tag =1 GROUP BY a.id
+  </select>
+  <!--最新的员工部门更新的信息-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+        employee.id,employee.name,departmentid,department.name as departmentname
+        from employee left join department on employee.departmentid=department.id where employee.id=#{id,jdbcType=VARCHAR} and  tag =1
+  </select>
+  <!--员工详细信息 包括每次的记录-->
+  <select id="selectByAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    deptransfer.id,employee.name,deptransfer.type, reason, remark, deptransfer.date, predepartmentname,deptransfer.departmentid,department.name as departmentname
+    from deptransfer left join employee on deptransfer.id = employee.id left join department on  deptransfer.departmentid= department.id
+    where deptransfer.id=#{id,jdbcType=VARCHAR} and employee.tag =1
+  </select>
+<!--  -->
+  <insert id="insertdepartment" parameterType="com.ndgwww.HR.management.pojo.Deptransfer">
+    insert into deptransfer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="predepartmentname != null">
+        predepartmentname,
+      </if>
+
+      <if test="departmentid != null">
+        departmentid,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="predepartmentname != null">
+        #{predepartmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insert" parameterType="com.ndgwww.HR.management.pojo.Deptransfer">
+    insert into deptransfer (id, type, reason, 
+      remark, date, predepartmentname,
+      departmentid)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{predepartmentname,jdbcType=VARCHAR},
+      #{departmentid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ndgwww.HR.management.pojo.Deptransfer">
+    insert into deptransfer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="predepartmentname != null">
+        predepartmentname,
+      </if>
+      <if test="departmentid != null">
+        departmentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="predepartmentname != null">
+        #{predepartmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
