@@ -1,0 +1,7 @@
+INSERT INTO `employee` VALUES ('1', 'sad', 1, '2000-3-6', '', '6', '人事部', '112', '管理', '0000-0-0', '0000-0-0', 0, '', '党员', 'asd', 'asd', 'asd', 'asd', 'asd', '', '未婚', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('12', '是否', 1, '2000-3-25', '', '8', '123', '1', '管理', '0000-0-0', '0000-0-0', 1, '', '党员', 'a\'s\'d', 'a\'da', 'a\'s\'da', 's\'d', 'asdaa', '', '未婚', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('13', '是否', 1, '2000-3-25', '', '1', '', '1', '管理', '0000-0-0', '0000-0-0', 1, '', '党员', 'a\'s\'d', 'a\'da', 'a\'s\'da', 's\'d', 'asdaa', '', '未婚', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('14', '严龙', 1, '2000-3-2', '', '2', '', '112', '管理', '2020-7-15', '2020-7-21', 0, '', '党员', 'a\'s\'d', 'a\'s\'d', 'asd', 'a\'s\'da\'s', 'a\'s\'d', '', '未婚', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('2', '撒旦', 1, '2000-3-6', '', '2', '', '112', '管理', '0000-0-0', '0000-0-0', 1, '校园招聘', '党员', 'ad1', 'asd', 'asd', '12312@qq.com', 'asda', '', '未婚', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('96', 'vv', 1, '2020-7-6', '', '1', '', '112', '警察', '0000-0-0', '0000-0-0', 0, '校园招聘', '党员', 'vvvv', '', 'vv', '', '', '', '', '', NULL, NULL, NULL, NULL, '', NULL, 1);
+INSERT INTO `employee` VALUES ('97', '支付宝', 1, '0000-0-0', '', '3', '营销部', '15', '管理', '2020-7-20', '2020-7-20', 0, '', '党员', '汉族', '', '135', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '2020-7-6', 1);

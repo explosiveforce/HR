@@ -1,0 +1,12 @@
+INSERT INTO `statransfer` VALUES (1, '1', 1, '丁俊晖开始', '2013-7-9', '销售', '管理', '顶上来书');
+INSERT INTO `statransfer` VALUES (2, '2', 2, '到黄金时代', '2013-7-2', '管理', '销售', '顶上来看见师父');
+INSERT INTO `statransfer` VALUES (3, '1', 1, '但是', '2013-7-2', '销售', '生产', '');
+INSERT INTO `statransfer` VALUES (4, '4', 2, '时代互联', '2013-7-3', '工人', '生产', '但是松开键');
+INSERT INTO `statransfer` VALUES (9, '1', 1, '1000', '2017-2-13', '1', '2', '1000');
+INSERT INTO `statransfer` VALUES (26, '1', 1, 'ww', '2013-7-9', '销售', '15', '顶上');
+INSERT INTO `statransfer` VALUES (27, '1', 1, 'aa', '2013-7-9', '销售', '15', '12');
+INSERT INTO `statransfer` VALUES (28, '1', 1, '无', '0000-0-0', '', '13', NULL);
+INSERT INTO `statransfer` VALUES (29, '1', 1, '无', '0000-0-0', '', '112', NULL);
+INSERT INTO `statransfer` VALUES (30, '10', 1, '无', '0000-0-0', '', '15', NULL);
+INSERT INTO `statransfer` VALUES (31, '1', 0, '无', '0000-0-0', '', '15', NULL);
+INSERT INTO `statransfer` VALUES (32, '96', 1, '无', '2020-7-7', '', '112', NULL);
